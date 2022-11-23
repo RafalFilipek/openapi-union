@@ -1,0 +1,57 @@
+openapi: 3.0.2
+info:
+  title: Portal FA
+  version: 1.0.0
+  description: Portal Frontend adapter
+paths:
+  /foo:
+    summary: Foo
+    description: Foo
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                foo:
+                  type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SomeGroupingType"
+
+components:
+  schemas:
+    Foo:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - Foo
+        foo:
+          type: string
+    Bar:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - Bar
+        bar:
+          type: string
+    SomeGroupingType:
+      oneOf:
+        - $ref: "#/components/schemas/Foo"
+        - $ref: "#/components/schemas/Bar"
+      discriminator:
+        propertyName: type
