@@ -10,18 +10,33 @@ import { request as __request } from '../core/request';
 export class DefaultService {
 
     /**
-     * @param requestBody
      * @returns SomeGroupingType OK
      * @throws ApiError
      */
-    public static postFoo(
+    public static postFoo({
+        group,
+        requestBody,
+        count,
+    }: {
+        /**
+         * group name
+         */
+        group: string,
         requestBody: {
             foo?: string;
         },
-    ): CancelablePromise<SomeGroupingType> {
+        /**
+         * count
+         */
+        count?: number,
+    }): CancelablePromise<SomeGroupingType> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/foo',
+            query: {
+                'group': group,
+                'count': count,
+            },
             body: requestBody,
             mediaType: 'application/json',
         });

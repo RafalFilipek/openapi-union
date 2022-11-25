@@ -8,6 +8,20 @@ paths:
     summary: Foo
     description: Foo
     post:
+      parameters:
+        - in: query
+          name: group
+          required: true
+          schema:
+            type: string
+          description: group name
+        - in: query
+          name: count
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+          description: count
       requestBody:
         required: true
         content:
